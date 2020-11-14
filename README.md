@@ -3,8 +3,7 @@
 
 # 代码使用方法
 1. git clone https://github.com/xujinzh/buy-a-house.git
-2. python main.py --area 88 --price 44800 --floatingRate 5.0 --firstRate 30 --
-providentFund 1200000 --providentFundRate 3.25 --lpr 5.4 --years 25
+2. python main.py --area 88 --price 44800 --floatingRate 5.0 --firstRate 30 --providentFund 1200000 --providentFundRate 3.25 --lpr 5.4 --years 25
 
 其中，area 指房屋面积，price 指房屋单价，firstRate 指首付比例，providentFund 指公积金贷款额，providentFundRate 指公积金贷款利率，lpr 指商业贷款利率，years 指贷款年限，floatingRate 是根据朝向、楼层价格调整率。
 
