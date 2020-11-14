@@ -7,7 +7,7 @@
 # @Software: PyCharm
 
 
-def monthly_repayment(capital=1600000, interest_rate=0.0465, years=25):
+def monthly_repayment(capital=1600000, interest_rate=0.054, years=25):
     """
     计算等额本金情况下每月的还款额
     :param capital: 本金
