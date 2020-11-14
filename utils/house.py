@@ -9,8 +9,7 @@
 from utils import repayment
 
 
-def loan_details(price=44800, area=89, first_rate=0.3, provident_fund=1200000, pro_fund_rate=0.0325, LPR=0.0465,
-                 years=25):
+def loan_details(price, area, first_rate, provident_fund, pro_fund_rate, LPR, years, floating_rate):
     """
     计算购买一套房子需要贷款和还款金额
     :param price: 房屋每平米价格
@@ -22,8 +21,11 @@ def loan_details(price=44800, area=89, first_rate=0.3, provident_fund=1200000, p
     :param years: 贷款年限
     :return: 贷款和等额本金还款信息
     """
+    truth_price = price * (1 + floating_rate / 100)
+    pro_fund_rate = pro_fund_rate / 100
+    LPR = LPR / 100
     # 房屋总价格
-    total_price = price * area
+    total_price = truth_price * area
     # 首付
     first_pay = total_price * first_rate
     # 总剩余还款额
@@ -35,9 +37,11 @@ def loan_details(price=44800, area=89, first_rate=0.3, provident_fund=1200000, p
     # 商业贷款每月还款额
     business_pay_month = repayment.monthly_repayment(capital=commercial_pay, interest_rate=LPR, years=years)
     print(
-        "{6} 平米(area)的房子，当单价(price)是 {0} 元，首付比例(firstRate)是 {1}，公积金最高贷款额度(providentFund)是 {2} 元，"
-        "公积金贷款利率(providentFundRate)是 {3}，当期 LPR(lpr) 是 {4}，"
-        "贷款年限是 {5} 年时：".format(price, first_rate, provident_fund, pro_fund_rate, LPR, years, area))
+        "{6} 平米(area)的房子，当单价(price)是 {0} 元，销售价格调整比例(floatingRate)是 {7}%，首付比例(firstRate)是 {1}%，"
+        "公积金最高贷款额度(providentFund)是 {2} 元，"
+        "公积金贷款利率(providentFundRate)是 {3}%，当期 LPR(lpr) 是 {4}%，"
+        "贷款年限是 {5} 年时：".format(price, first_rate * 100, provident_fund, pro_fund_rate * 100, LPR * 100, years, area,
+                               floating_rate))
     print("\t总价是 {} 元".format(total_price))
     print("\t首付是 {} 元".format(first_pay))
     print("\t总剩余还款额是 {} 元".format(total_remainder))
